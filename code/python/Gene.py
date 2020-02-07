@@ -11,9 +11,7 @@ class Gene:
     name (str): type of gene
     """
     def __init__(self, name:str, allele:int, seq:str=""):
-        self.__seq = seq
-        self.__allele = allele
-        self.__name = name
+        self.__seq = seq; self.__allele = allele; self.__name = name
 
     """
     Attributes
@@ -29,11 +27,9 @@ class Gene:
             
         return seq
 
-    def allele(self):
-        return (self.__allele)
+    def allele(self): return (self.__allele)
 
-    def name(self):
-        return (self.__name)
+    def name(self): return (self.__name)
 
     """
     Modifiers

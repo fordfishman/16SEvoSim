@@ -14,6 +14,7 @@ class rRNA:
     NUCLEOTIDES (tuple): set of A, G, C, T
     """
     def __init__(self, seq:str=None, length:int=1400):
+
         self.NUCLEOTIDES = ("A","C","G","T")
         # if no sequence is given
         if seq is None:
@@ -37,21 +38,28 @@ class rRNA:
             
         return seq
 
-    def length(self):
-        return self.__length
+    def length(self): return self.__length
 
     """
     Functions
-    """
-    # generate a new rRNA sequence
+    """    
     def newSeq(self, length):
+        """Generate a new rRNA sequence"""
         seq = np.random.choice(self.NUCLEOTIDES,  # sample nucleotides with replacement 
             size = length, 
             replace = True)
         return seq
 
-    # Mutate portions of SSU genome
-    # Can substitute @ multiple consecutive positions
-    def mutate(self, i=int):
+
+    def mutate(self, i:int=None):
+        """Mutate positions of SSU genome"""
+        if i is None or i >= len(self.__seq) or i < 0:
+            i = np.random.choice( list( range(0,len(self.__seq)) ) ) # an integer indexing the gene
+        
+        noChange = True # sequence hasn't yet been changed
+        while noChange:
+            oldNT = self.__seq[i]
+            self.__seq[i] = np.random.choice(self.NUCLEOTIDES)
+            noChange = oldNT == self.__seq[i]
 
         return None

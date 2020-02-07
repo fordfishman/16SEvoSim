@@ -41,25 +41,22 @@ class Strain:
     """
     Attributes
     """
-    def name(self):
-        return self.__name
+    def name(self): return self.__name
 
-    def ssu(self):
-        return self.__ssu
+    def ssu(self): return self.__ssu
 
-    def genome(self):
-        return self.__genome
+    def genome(self): return self.__genome
 
-    def pop(self):
-        return self.__pop
+    def pop(self): return self.__pop
+
+    def getGeneNames(self): return list(self.__genome.keys())
 
     """
     Modifiers
     """
 
-    # change strain population size
     def setPop(self, pop:int):
-        
+        """Change strain population size"""
         self.__pop = pop
 
         return None
@@ -67,27 +64,25 @@ class Strain:
     """
     Other Functions
     """
-
-    # Return gene object with specified name
+    
     def getGene(self, geneName):
+        """Return gene object with specified name"""
         return self.__genome[geneName]
 
-    # create new rRNA sequence
     def newRNA(self, length:int):
-
+        """Create new rRNA sequence"""
         return rRNA.rRNA(length=length)
 
-
-    # add gene to the genome
+    
     def addGene(self, gene:Gene.Gene):
-
+        """Add gene to the genome"""
         self.__genome[gene.name()] = gene
 
         return None
 
-    # remove gene from genome by index or by name 
+    
     def removeGene(self, name:str=None, i:int=None):
-
+        """Remove gene from genome by index or by name""" 
         try:
 
             if ((name is None) and (i is None)) or ((not name is None) and (not i is None)):
@@ -109,10 +104,16 @@ class Strain:
               
         return None
     
-    # change the allele type of a gene by gene name
+    
     def changeAllele(self, geneName:str, newAllele:int):
-
+        """Change the allele type of a gene by gene name"""
         self.__genome[geneName].setAllele(newAllele)
+
+        return None
+
+    def changeSSU(self):
+        """Mutate the strain's SSU"""
+        self.__ssu.mutate()
 
         return None
 
