@@ -17,6 +17,9 @@ geneRemoval = 0
 time = 0
 
 rate = ssuChange + alleleChange + fitnessChange + geneAddition + geneRemoval
+
+
+
 """
 Main function for running simulation
 """
@@ -47,8 +50,24 @@ Execute main function
 if __name__ == "__main__":
     main()
 
-def event():
+def event(time:float = time):
     """
 
     """
+    rawRates = [ssuChange, alleleChange, fitnessChange, geneAddition, geneRemoval] # list of rates of all event types
+
+    prob = [x / rate for x in rawRates] # the conditional probability of each type of event happening if an event has occurred
+
+    time += np.random.exponential(scale = rate) # draw from exponential distribution for time to next event
+
+    event = np.random.choice( # pick the event that happens randomly, according to its rate
+        a = ["ssuChange", "alleleChange", "fitnessChange", "geneAddition", "geneRemoval"],
+        p = prob,
+        replace = True
+    )
+
+    locals()[event]()
     
+    """HAVE TO ACTUALLY CODE FUNCTIONS FOR WHATS IN """
+
+    return None

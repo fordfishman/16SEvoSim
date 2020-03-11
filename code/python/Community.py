@@ -14,11 +14,12 @@ class Community:
     strains (dict): dictionary of strain_id:strain
     richness (int): number of strains present in the community
     """
-    def __init__(self, strains:dict, selection_gradient:dict={}):
+    def __init__(self, strains:dict):
 
         self.__strains = strains
         self.__richness = len(self.__strains)
-        self.__selection_gradient = selection_gradient
+        self.__selection_gradient = {}
+        self.initializeGradient()
 
     """
     Attributes
@@ -69,7 +70,7 @@ class Community:
 
                 gene_name = gene.name()
                 allele_name = gene.allele()
-
+                # new genes start at relative fitness of 1
                 if gene_name not in self.__selection_gradient:
                     # nested dictionary - gene_name: allele_name: relative fitness
                     self.__selection_gradient[gene_name] = {allele_name:1} 

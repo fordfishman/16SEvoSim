@@ -94,7 +94,7 @@ class Strain:
             print("Specify a name for the gene or its place in the genome")
             print()
 
-        finally:
+        else:
             
             if i is None: # if gene is specified by name
 
